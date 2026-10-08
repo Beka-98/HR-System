@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">HR</div>
+          <div>
+            <h1>HR System</h1>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item active" data-section="dashboard">Dashboard</button>
+          <button class="nav-item" data-section="employees">Employees</button>
+          <button class="nav-item" data-section="attendance">Attendance</button>
+          <button class="nav-item" data-section="leave">Leave</button>
+          <button class="nav-item" data-section="payroll">Payroll</button>
+          <button class="nav-item" data-section="reports">Reports</button>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Management</p>
+            <h2>Human Resources Dashboard</h2>
+          </div>
+          <button class="primary-btn">+ New Employee</button>
+        </header>
+
+        <section id="dashboard" class="panel active-panel">
+          <div id="statsGrid" class="stats-grid"></div>
+          <div class="activity-box">
+            <h3>Recent Activity</h3>
+            <ul id="activityList"></ul>
+          </div>
+        </section>
+
+        <section id="employees" class="panel">
+          <div class="section-header">
+            <h3>Employees</h3>
+            <button id="toggleEmployeeForm" class="secondary-btn">Add Employee</button>
+          </div>
+
+          <form id="employeeForm" class="form-card hidden">
+            <div class="form-grid">
+              <input name="fullName" placeholder="Full name" required />
+              <input name="email" type="email" placeholder="Email" required />
+              <input name="phone" placeholder="Phone" required />
+              <input name="department" placeholder="Department" required />
+              <input name="position" placeholder="Position" required />
+              <input name="manager" placeholder="Manager" required />
+              <input name="hireDate" type="date" required />
+              <input name="salary" type="number" placeholder="Salary" required />
+            </div>
+            <button class="primary-btn" type="submit">Save Employee</button>
+          </form>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Position</th>
+                  <th>Status</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+              <tbody id="employeesTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="attendance" class="panel">
+          <div class="section-header">
+            <h3>Attendance</h3>
+            <button id="toggleAttendanceForm" class="secondary-btn">Record Attendance</button>
+          </div>
+
+          <form id="attendanceForm" class="form-card hidden">
+            <div class="form-grid">
+              <input name="employeeName" placeholder="Employee Name" required />
+              <input name="date" type="date" required />
+              <input name="checkIn" type="time" required />
+              <input name="checkOut" type="time" required />
+              <select name="status">
+                <option value="Present">Present</option>
+                <option value="Late">Late</option>
+                <option value="Leave">Leave</option>
+              </select>
+            </div>
+            <button class="primary-btn" type="submit">Save</button>
+          </form>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Check In</th>
+                  <th>Check Out</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="leave" class="panel">
+          <div class="section-header">
+            <h3>Leave Requests</h3>
+            <button id="toggleLeaveForm" class="secondary-btn">Request Leave</button>
+          </div>
+
+          <form id="leaveForm" class="form-card hidden">
+            <div class="form-grid">
+              <input name="employeeName" placeholder="Employee Name" required />
+              <input name="type" placeholder="Leave Type" required />
+              <input name="startDate" type="date" required />
+              <input name="endDate" type="date" required />
+              <input name="reason" placeholder="Reason" required />
+            </div>
+            <button class="primary-btn" type="submit">Submit</button>
+          </form>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Type</th>
+                  <th>Dates</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="leaveTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="payroll" class="panel">
+          <div class="section-header">
+            <h3>Payroll</h3>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Month</th>
+                  <th>Base Salary</th>
+                  <th>Allowances</th>
+                  <th>Deductions</th>
+                  <th>Net Salary</th>
+                </tr>
+              </thead>
+              <tbody id="payrollTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="reports" class="panel">
+          <div class="section-header">
+            <h3>Reports</h3>
+          </div>
+          <div class="reports-grid">
+            <div class="report-box">
+              <span>Attendance Rate</span>
+              <strong id="attendanceRate">--</strong>
+            </div>
+            <div class="report-box">
+              <span>Total Payroll</span>
+              <strong id="totalPayroll">--</strong>
+            </div>
+            <div class="report-box">
+              <span>Departments</span>
+              <strong id="departmentsCount">--</strong>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
